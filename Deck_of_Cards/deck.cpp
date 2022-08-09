@@ -115,8 +115,9 @@ const char * card_str(const Card & c) {
   char & outstr_rank = outstr[0];
   char & outstr_suit = outstr[1];
 
-  if (c.rank > 7) outstr_rank = facecards[c.rank - 7]; // T J Q K A
-  else outstr_rank = c.rank + '2'; // numeric cards
+  if (c.rank > 8) outstr_rank = facecards[c.rank - 8]; // T J Q K A
+  else if (c.rank >= 0 && c.rank <= 7) outstr_rank = c.rank + '2';
+  else EXC::E("\nCard: issue with card\n"); // numeric cards
 
   outstr_suit = suitstr[c.suit];
   return (const char *) outstr;
